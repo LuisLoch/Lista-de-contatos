@@ -36,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         //mapeamento dos campos da interface
         nome=findViewById(R.id.nomeId);
         telefone=findViewById(R.id.telefoneId);
-        dados= new ArrayList();//aloca lista
         listagem=findViewById(R.id.listaId);
+
+        //alocamento de lista
+        dados= new ArrayList();
 
         //vincula adapter
         ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,dados);
@@ -54,9 +56,22 @@ public class MainActivity extends AppCompatActivity {
         listagem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                new AlertDialog.Builder(view.getContext())
-                .setMessage("Detalhes do contato")
-                        .setPositiveButton("", null).setNegativeButton("", null).create().show();
+                    dados.get(i).getId();
+                    new AlertDialog.Builder(view.getContext())
+                    .setMessage("Edicao de contato")
+                    .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int j) {
+                            Contato contato = new Contato();
+                            contato.setNome(nome.getText().toString());
+                            contato.setTelefone(telefone.getText().toString());
+                            contatoDB.editar(dados.get(i).getId(), contato);
+                            contatoDB.lista(dados);
+                            contatoDB.atualizar(listagem);
+                        }
+                    })
+                    .setNegativeButton("Fechar", null)
+                    .create().show();
             }
         });
 
@@ -72,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
                                 contatoDB.lista(dados);
                                 contatoDB.atualizar(listagem);
                             }
-                        }).setNegativeButton("Cancelar",null).create().show();
+                        }).setNegativeButton("Cancelar",null)
+                        .create().show();
                 return false;
             }
         });
