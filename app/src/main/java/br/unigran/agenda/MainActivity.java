@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listagem;
     DBHelper db;
     ContatoDB contatoDB;
+    public int longClickEstaAtivo = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,27 +58,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     dados.get(i).getId();
-                    new AlertDialog.Builder(view.getContext())
-                    .setMessage("Edicao de contato")
-                    .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int j) {
-                            Contato contato = new Contato();
-                            contato.setNome(nome.getText().toString());
-                            contato.setTelefone(telefone.getText().toString());
-                            contatoDB.editar(dados.get(i).getId(), contato);
-                            contatoDB.lista(dados);
-                            contatoDB.atualizar(listagem);
-                        }
-                    })
-                    .setNegativeButton("Fechar", null)
-                    .create().show();
+                    if(longClickEstaAtivo==0) {
+                        new AlertDialog.Builder(view.getContext())
+                                .setMessage("Edicao de contato")
+                                .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int j) {
+                                        Contato contato = new Contato();
+                                        contato.setNome(nome.getText().toString());
+                                        contato.setTelefone(telefone.getText().toString());
+                                        contatoDB.editar(dados.get(i).getId(), contato);
+                                        contatoDB.lista(dados);
+                                        contatoDB.atualizar(listagem);
+                                    }
+                                })
+                                .setNegativeButton("Fechar", null)
+                                .create().show();
+                    }
             }
         });
 
         listagem.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                longClickEstaAtivo = 1;
                 new AlertDialog.Builder(view.getContext())
                         .setMessage("Remover contato?")
                         .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }).setNegativeButton("Cancelar",null)
                         .create().show();
+                longClickEstaAtivo = 0;
                 return false;
             }
         });

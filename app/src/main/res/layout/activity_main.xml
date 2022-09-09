@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/hint_entre_com_nome"
+        android:hint="@string/hint_nome"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575"
@@ -32,7 +32,7 @@
         android:layout_marginEnd="8dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/hint_entre_com_o_numero"
+        android:hint="@string/hint_numero"
         android:inputType="phone"
         android:minHeight="48dp"
         android:textColorHint="#757575"
@@ -42,16 +42,14 @@
 
     <Button
         android:id="@+id/salvarId"
-        android:layout_width="288dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="356dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:hint="@string/hint_salvar_contato"
+        android:layout_marginEnd="12dp"
         android:onClick="salvar"
         android:text="@string/salvar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/telefoneId" />
 
@@ -60,18 +58,10 @@
         android:layout_width="395dp"
         android:layout_height="511dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/salvarId" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="50dp"
-        android:layout_height="42dp"
-        android:text="Button"
-        tools:layout_editor_absoluteX="354dp"
-        tools:layout_editor_absoluteY="142dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
