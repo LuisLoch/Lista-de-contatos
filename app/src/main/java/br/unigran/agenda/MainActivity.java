@@ -90,10 +90,15 @@ public class MainActivity extends AppCompatActivity {
                                 contatoDB.remover(dados.get(i).getId());
                                 contatoDB.lista(dados);
                                 contatoDB.atualizar(listagem);
+                                longClickEstaAtivo = 0;
                             }
-                        }).setNegativeButton("Cancelar",null)
+                        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                longClickEstaAtivo = 0;
+                            }
+                        })
                         .create().show();
-                longClickEstaAtivo = 0;
                 return false;
             }
         });
